@@ -151,11 +151,7 @@ final class Lipscore {
 		$this->url      = plugin_dir_url( __FILE__ );
 		$this->path     = plugin_dir_path( __FILE__ );
 
-        $this->config             = new Lipscore_Config();
-        $this->settings_tab       = new Lipscore_Admin_Settings_Tab();
-        $this->widget_manager     = new Lipscore_Widget_Manager();
-        $this->initializer        = new Lipscore_Initializer();
-        $this->wc_review_disabler = new Lipscore_WC_Review_Disabler();
+        $this->config = new Lipscore_Config();
 	}
 
 	/**
@@ -169,55 +165,97 @@ final class Lipscore {
 		// < 10 for CPT_Core,
 		// < 5 for Taxonomy_Core,
 		// 0 Widgets because widgets_init runs at init priority 1.
+
 		add_action( 'init', array( $this, 'init' ), 0 );
 
+        $settings_tab = new Lipscore_Admin_Settings_Tab();
         add_filter(
             'woocommerce_settings_tabs_array',
-            array( $this->settings_tab, 'init' ),
+            array( $settings_tab, 'init' ),
             50
         );
         add_action(
             'woocommerce_settings_tabs_settings_tab_lipscore',
-            array( $this->settings_tab, 'tab_content' )
+            array( $settings_tab, 'tab_content' )
         );
         add_action(
             'woocommerce_update_options_settings_tab_lipscore',
-            array( $this->settings_tab, 'update_settings' )
+            array( $settings_tab, 'update_settings' )
+        );
+        add_action(
+            'admin_enqueue_scripts',
+            array( $settings_tab, 'add_assets' )
         );
 
+        $wc_review_disabler = new Lipscore_WC_Review_Disabler();
         add_filter(
             'comments_open',
-            array( $this->wc_review_disabler, 'disable_product_comments' ),
+            array( $wc_review_disabler, 'disable_product_comments' ),
             1000,
             2
         );
         add_action(
             'add_meta_boxes' ,
-            array( $this->wc_review_disabler, 'remove_metaboxes' ),
+            array( $wc_review_disabler, 'remove_metaboxes' ),
             99
         );
         add_action(
             'wp_dashboard_setup',
-            array( $this->wc_review_disabler, 'remove_dashboard_reviews' ),
+            array( $wc_review_disabler, 'remove_dashboard_reviews' ),
             50
         );
 
-        add_action(
-            'admin_enqueue_scripts',
-            array( $this->settings_tab, 'add_assets' )
-        );
+        $widget_manager = new Lipscore_Widget_Manager();
         add_action(
             'woocommerce_after_shop_loop_item_title',
-            array( $this->widget_manager, 'add_small_rating' )
+            array( $widget_manager, 'add_small_rating' ),
+            1
         );
         add_action(
             'woocommerce_single_product_summary',
-            array( $this->widget_manager, 'add_rating' ),
+            array( $widget_manager, 'add_rating' ),
             6
         );
         add_action(
-            'woocommerce_single_product_summary',
-            array( $this->initializer, 'add_script' )
+            'woocommerce_product_tabs',
+            array( $widget_manager, 'add_reviews_tab' ),
+            6
+        );
+        add_action(
+            'wp_head',
+            array( $widget_manager, 'add_styles' ),
+            6
+        );
+        add_action(
+            'wp_enqueue_scripts',
+            array( $widget_manager, 'add_scripts' ),
+            6
+        );
+
+        $initializer = new Lipscore_Initializer();
+        add_action(
+            'wp_head',
+            array( $initializer, 'add_script' )
+        );
+
+        $order_observer = new Lipscore_Order_Observer();
+        add_action(
+            'woocommerce_checkout_order_processed',
+            array( $order_observer, 'create' ),
+            10,
+            2
+        );
+        add_action(
+            'woocommerce_order_status_changed',
+            array( $order_observer, 'status_update' ),
+            10,
+            3
+        );
+        add_action(
+            'woocommerce_process_shop_order_meta',
+            array( $order_observer, 'meta_save' ),
+            10,
+            2
         );
 	}
 
@@ -410,6 +448,10 @@ final class Lipscore {
 
     public static function assets_url( $path = '' ) {
         return static::url( 'assets/' . $path );
+    }
+
+    public static function is_woocommerce() {
+        return function_exists( 'is_woocommerce' ) && ( is_woocommerce() || is_cart() || is_checkout() );
     }
 }
 

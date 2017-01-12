@@ -23,33 +23,37 @@ class Lipscore_Admin_Settings_Tab {
     }
 
     public function add_assets() {
-        wp_enqueue_style('lipscore-admin-styles', Lipscore::assets_url( 'css/admin.css' ) );
+        wp_enqueue_style('lipscore-admin-styles', Lipscore::assets_url( 'css/admin.css' ), array(), Lipscore::VERSION );
     }
 
     protected function get_settings() {
-        $settings = array(
-            'title' => array(
-                'name'     => __( 'Lipscore Settings', 'woocommerce-settings-tab-lipscore' ),
-                'type'     => 'title',
-                'id'       => 'lipscore_section_title'
-            )
-        );
-        $api_key = array(
-            'name' => __( 'Api Key', 'woocommerce-settings-tab-lipscore' ),
-            'type' => 'text',
-            'desc' => __( "", 'woocommerce-settings-tab-lipscore' ),
-            'id'   => 'lipscore_api_key'
-        );
+        $settings = array();
 
-        $settings['api_key'] = $this->api_key_setting();
-        $settings['locale']  = $this->locale_setting();
+        $settings['general_title'] = $this->general_title();
+        $settings['api_key']       = $this->api_key_setting();
+        $settings['locale']        = $this->locale_setting();
+        $settings['general_end']   = $this->general_section_end();
 
-        $settings['section_end'] = array(
-            'type' => 'sectionend',
-            'id' => 'lipscore_section_end'
-        );
+        $settings['emails_title'] = $this->emails_title();
+        $settings['order_status'] = $this->order_status_setting();
+        $settings['emails_end']   = $this->emails_section_end();
+
+        $settings['coupons_title']      = $this->coupons_title();
+        $settings['coupon_code']        = $this->coupon_code_setting();
+        $settings['coupon_description'] = $this->coupon_description_setting();
+
+        $settings['coupons_end']   = $this->coupons_section_end();
 
         return apply_filters( 'wc_settings_tab_lipscore_settings', $settings );
+    }
+
+    protected function general_title() {
+        return array(
+            'name'     => __( 'General settings', 'woocommerce-settings-tab-lipscore' ),
+            'type'     => 'title',
+            'desc'     => 'Advanced settings are available on your <a href="https://members.lipscore.com/">Lipscore Dashboard</a>',
+            'id'       => 'lipscore_general_title'
+        );
     }
 
     protected function api_key_setting() {
@@ -91,6 +95,77 @@ class Lipscore_Admin_Settings_Tab {
                 'es'   => __( 'Spanish', 'woocommerce-settings-tab-lipscore' ),
                 'se'   => __( 'Swedish', 'woocommerce-settings-tab-lipscore' )
             )
+        );
+    }
+
+
+    protected function general_section_end() {
+        return array(
+            'type' => 'sectionend',
+            'id'   => 'lipscore_general_section_end'
+        );
+    }
+
+    protected function emails_title() {
+        return array(
+            'name'     => __( 'Review Request Emails', 'woocommerce-settings-tab-lipscore' ),
+            'type'     => 'title',
+            'desc'     => 'The single most important feature to get ratings and reviews is to send existing customers Review Request Emails after the customer has received the product.<br/>Please choose which order status that triggers these emails (previews can be seen in your <a href="https://members.lipscore.com/">Lipscore Dashboard</a>)',
+            'id'       => 'lipscore_emails_title'
+        );
+    }
+
+    protected function order_status_setting() {
+        $statuses = wc_get_order_statuses();
+
+        return array(
+            'name'      => __( 'Order status', 'woocommerce-settings-tab-lipscore' ),
+            'type'      => 'select',
+            'desc'      => 'Send emails for orders in this status',
+            'id'        => 'lipscore_order_status',
+            'default'   => Lipscore_Settings::DEFAULT_ORDER_STATUS,
+            'options'   => $statuses
+        );
+    }
+
+    protected function emails_section_end() {
+        return array(
+            'type' => 'sectionend',
+            'id'   => 'lipscore_emails_section_end'
+        );
+    }
+
+    protected function coupons_title() {
+        return array(
+            'name'     => __( 'Coupons', 'woocommerce-settings-tab-lipscore' ),
+            'type'     => 'title',
+            'desc'     => 'Coupons are a great way to give customers an incentive to write a review. Create a coupon code in the "Coupons" section and paste it here along with a description. The code will be emailed to your customers after their review has been submitted.',
+            'id'       => 'lipscore_coupons_title'
+        );
+    }
+
+    protected function coupon_code_setting() {
+        return array(
+            'name'      => __( 'Coupon code', 'woocommerce-settings-tab-lipscore' ),
+            'type'      => 'text',
+            'id'        => 'lipscore_coupon_code',
+            'default'   => Lipscore_Settings::DEFAULT_COUPON_CODE
+        );
+    }
+
+    protected function coupon_description_setting() {
+        return array(
+            'name'      => __( 'Coupon description', 'woocommerce-settings-tab-lipscore' ),
+            'type'      => 'textarea',
+            'id'        => 'lipscore_coupon_description',
+            'default'   => Lipscore_Settings::DEFAULT_COUPON_DESCRIPTION
+        );
+    }
+
+    protected function coupons_section_end() {
+        return array(
+            'type' => 'sectionend',
+            'id'   => 'lipscore_coupons_section_end'
         );
     }
 }

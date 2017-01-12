@@ -1,3 +1,7 @@
 .lipscore-settings .description {
     display: block;
 }
+
+.lipscore-settings input, select, textarea {
+    width: 300px
+}

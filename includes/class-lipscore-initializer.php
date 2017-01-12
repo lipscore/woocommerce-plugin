@@ -8,8 +8,8 @@ if ( ! class_exists( 'Lipscore_Initializer' ) ) :
 
 class Lipscore_Initializer {
     public function add_script() {
-        if ( ! $this->is_woocommerce() ) {
-            return '';
+        if ( ! Lipscore::is_woocommerce() ) {
+            return;
         }
 
         $api_key   = Lipscore_Settings::api_key();
@@ -33,10 +33,6 @@ class Lipscore_Initializer {
             //]]>
             </script>
         ";
-    }
-
-    protected function is_woocommerce() {
-        return function_exists( 'is_woocommerce' ) && ( is_woocommerce() || is_cart() || is_checkout() );
     }
 }
 
