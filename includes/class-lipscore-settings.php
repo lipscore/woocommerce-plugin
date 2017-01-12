@@ -9,7 +9,7 @@ if ( ! class_exists( 'Lipscore_Settings' ) ) :
 class Lipscore_Settings {
     const DEFAULT_API_KEY              = '889c3f3e4b6ac67269261324';
     const DEFAULT_LOCALE               = 'auto';
-    const DEFAULT_ORDER_STATUS         = 'wc-pending';
+    const DEFAULT_ORDER_STATUS         = 'wc-completed';
     const DEFAULT_COUPON_CODE          = '';
     const DEFAULT_COUPON_DESCRIPTION   = '';
 
