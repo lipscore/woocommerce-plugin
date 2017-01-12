@@ -251,12 +251,6 @@ final class Lipscore {
             10,
             3
         );
-        add_action(
-            'woocommerce_process_shop_order_meta',
-            array( $order_observer, 'meta_save' ),
-            10,
-            2
-        );
 	}
 
 
