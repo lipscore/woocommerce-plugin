@@ -12,7 +12,7 @@ class Lipscore_Product_Helper {
             'name'         => $product->get_title(),
             'brand'        => '',
             'sku_values'   => [$product->get_sku()],
-            'internal_id'  => $product->get_id(),
+            'internal_id'  => (string) $product->get_id(),
             'url'          => get_permalink($product->get_id()),
             'image_url'    => $this->image_url( $product ),
             'price'        => $product->get_price(),
@@ -23,13 +23,13 @@ class Lipscore_Product_Helper {
 
     public function richsnippet_product_data( $product ) {
         return array(
-            'description'  => get_the_excerpt($product->ID),
+            'description'  => get_the_excerpt($product->get_id()),
             'availability' => $this->availability( $product )
         );
     }
 
     protected function product_category( $product ) {
-        $terms = get_the_terms( $product->ID, 'product_cat' );
+        $terms = get_the_terms( $product->get_id(), 'product_cat' );
 
         if ( is_wp_error( $terms ) || empty( $terms ) || !is_array( $terms ) ) {
             return '';
