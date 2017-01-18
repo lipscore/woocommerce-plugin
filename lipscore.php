@@ -251,6 +251,13 @@ final class Lipscore {
             10,
             3
         );
+
+        add_filter(
+            'option_lipscore_locale',
+            array( $this, 'fix_lipscore_locale_option' ),
+            10,
+            2
+        );
 	}
 
 
@@ -446,6 +453,14 @@ final class Lipscore {
 
     public static function is_woocommerce() {
         return function_exists( 'is_woocommerce' ) && ( is_woocommerce() || is_cart() || is_checkout() );
+    }
+
+    public function fix_lipscore_locale_option( $value, $option) {
+        if ( $value == 'auto' ) {
+            return Lipscore_Settings::DEFAULT_LOCALE;
+        } else {
+            return $value;
+        }
     }
 }
 

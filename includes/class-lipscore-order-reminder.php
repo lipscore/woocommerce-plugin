@@ -33,7 +33,7 @@ class Lipscore_Order_Reminder {
             'discount_descr'   => Lipscore_Settings::coupon_description(),
             'discount_voucher' => Lipscore_Settings::coupon_code(),
             'purchased_at'     => (int) strtotime( $order->order_date ),
-            'lang'             => Lipscore_Locale_Helper::shop_locale()
+            'lang'             => Lipscore_Settings::locale()
         );
     }
 

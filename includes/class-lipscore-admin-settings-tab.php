@@ -75,11 +75,9 @@ class Lipscore_Admin_Settings_Tab {
         return array(
             'name'      => __( 'Interface Locale', 'woocommerce-settings-tab-lipscore' ),
             'type'      => 'select',
-            'desc'      => 'If "Auto" is selected, the store locale will be used.',
             'id'        => 'lipscore_locale',
             'default'   => Lipscore_Settings::DEFAULT_LOCALE,
             'options'   => array(
-                'auto' => __( 'Auto', 'woocommerce-settings-tab-lipscore' ),
                 'cz'   => __( 'Czech', 'woocommerce-settings-tab-lipscore' ),
                 'dk'   => __( 'Danish', 'woocommerce-settings-tab-lipscore' ),
                 'nl'   => __( 'Dutch', 'woocommerce-settings-tab-lipscore' ),

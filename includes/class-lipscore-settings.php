@@ -8,7 +8,7 @@ if ( ! class_exists( 'Lipscore_Settings' ) ) :
 
 class Lipscore_Settings {
     const DEFAULT_API_KEY              = '889c3f3e4b6ac67269261324';
-    const DEFAULT_LOCALE               = 'auto';
+    const DEFAULT_LOCALE               = 'en';
     const DEFAULT_ORDER_STATUS         = 'wc-completed';
     const DEFAULT_COUPON_CODE          = '';
     const DEFAULT_COUPON_DESCRIPTION   = '';
@@ -18,12 +18,7 @@ class Lipscore_Settings {
     }
 
     public static function locale() {
-        $locale = get_option( 'lipscore_locale', self::DEFAULT_LOCALE );
-        if ( $locale == 'auto') {
-            $locale = Lipscore_Locale_Helper::shop_locale();
-        }
-
-        return $locale;
+        return get_option( 'lipscore_locale', self::DEFAULT_LOCALE );
     }
 
     public static function order_status() {
