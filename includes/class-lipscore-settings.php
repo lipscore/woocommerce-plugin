@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'Lipscore_Settings' ) ) :
 
 class Lipscore_Settings {
-    const DEFAULT_API_KEY              = '889c3f3e4b6ac67269261324';
+    const DEFAULT_API_KEY              = '8d11d10169159ba3da361b61';
     const DEFAULT_LOCALE               = 'en';
     const DEFAULT_ORDER_STATUS         = 'wc-completed';
     const DEFAULT_COUPON_CODE          = '';
