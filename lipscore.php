@@ -221,6 +221,12 @@ final class Lipscore {
             array( $widget_manager, 'add_reviews_tab' ),
             6
         );
+        add_filter(
+            'comments_template',
+            array( $widget_manager, 'show_reviews_instead_comments' ),
+            10,
+            2
+        );
         add_action(
             'wp_head',
             array( $widget_manager, 'add_styles' ),

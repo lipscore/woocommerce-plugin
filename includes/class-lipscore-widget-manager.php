@@ -27,11 +27,17 @@ class Lipscore_Widget_Manager {
         );
 
         $tabs['lipscorereviews'] = array(
-            'title'    => __( 'Reviews', 'woocommerce' ),
+            'title'    => '',
             'priority' => 30,
             'callback' => array( $this, 'reviews_tab_content' )
         );
         return $tabs;
+    }
+
+    public function show_reviews_instead_comments($comment_template) {
+        if ( function_exists( 'is_woocommerce' ) && is_woocommerce() && is_singular() ) {
+            return Lipscore::dir( 'templates/reviews_single_widget' . '.php' );
+        }
     }
 
     public function add_styles() {
@@ -53,9 +59,7 @@ class Lipscore_Widget_Manager {
     }
 
     public function add_html_to_reviews_tab_title( $title ) {
-        $review_count_html = '<span id="js-lipscore-reviews-tab-count" style="display: none;">&nbsp;(<span class="lipscore-review-count"></span>)</span>';
-        $title = '<span id="js-lipscore-reviews-tab">' . $title . '</span>';
-        return $title . $review_count_html;
+        return $this->render_widget( 'reviews_title' );
     }
 
     protected function render_widget( $file, $args = array() ) {
