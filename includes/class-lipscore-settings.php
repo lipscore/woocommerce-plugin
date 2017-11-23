@@ -17,6 +17,10 @@ class Lipscore_Settings {
         return get_option( 'lipscore_api_key', self::DEFAULT_API_KEY );
     }
 
+    public static function secret() {
+        return get_option( 'lipscore_secret', self::DEFAULT_API_KEY );
+    }
+
     public static function locale() {
         return get_option( 'lipscore_locale', self::DEFAULT_LOCALE );
     }

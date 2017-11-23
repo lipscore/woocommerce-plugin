@@ -58,6 +58,7 @@ class Lipscore_Order_Reminder {
         }
 
         $api_key = Lipscore_Settings::api_key();
+        $secret  = Lipscore_Settings::secret();
         $api_url = lipscore()->config->api_url();
 
         wp_remote_post(
@@ -65,7 +66,10 @@ class Lipscore_Order_Reminder {
             array(
                 'timeout' => 3,
                 'body'    => json_encode($data),
-                'headers' => array( 'Content-Type' => 'application/json' )
+                'headers' => array(
+                    'Content-Type'    => 'application/json',
+                    'X-Authorization' => $secret
+                )
             )
         );
     }

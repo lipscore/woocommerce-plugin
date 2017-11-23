@@ -24,6 +24,9 @@ class Lipscore_Admin_Settings_Tab {
 
     public function add_assets() {
         wp_enqueue_style('lipscore-admin-styles', Lipscore::assets_url( 'css/admin.css' ), array(), Lipscore::VERSION );
+        wp_enqueue_script(
+            'lipscore-js', Lipscore::assets_url( 'js/admin.js' ), array( 'jquery' ), Lipscore::VERSION, true
+        );
     }
 
     protected function get_settings() {
@@ -31,6 +34,7 @@ class Lipscore_Admin_Settings_Tab {
 
         $settings['general_title'] = $this->general_title();
         $settings['api_key']       = $this->api_key_setting();
+        $settings['secret']        = $this->secret_setting();
         $settings['locale']        = $this->locale_setting();
         $settings['general_end']   = $this->general_section_end();
 
@@ -63,11 +67,20 @@ class Lipscore_Admin_Settings_Tab {
         }
 
         return array(
-            'name'      => __( 'Api Key', 'woocommerce-settings-tab-lipscore' ),
+            'name'      => __( 'API Key', 'woocommerce-settings-tab-lipscore' ),
             'type'      => 'text',
             'desc'      => $description,
             'id'        => 'lipscore_api_key',
-            'default'   => Lipscore_Settings::DEFAULT_API_KEY
+            'default'   => Lipscore_Settings::DEFAULT_API_KEY,
+        );
+    }
+
+    protected function secret_setting() {
+        return array(
+            'name'      => __( 'Secret API Key', 'woocommerce-settings-tab-lipscore' ),
+            'type'      => 'text',
+            'id'        => 'lipscore_secret',
+            'class'     => 'js-ls-no-autocomplete-field'
         );
     }
 
