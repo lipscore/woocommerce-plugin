@@ -3,7 +3,7 @@
 **Tags:**  
 **Requires at least:** 4.4  
 **Tested up to:**      4.7
-**Stable tag:**        0.1.1  
+**Stable tag:**        0.2.1  
 **License:**           GPLv2  
 **License URI:**       http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -29,3 +29,6 @@
 
 ### 0.2.0 ###
 * Add Secure Lipscore API Key for compatibility with Lipscore API v2
+
+### 0.2.1 ###
+* Use customer billing name in invitation data sent to Lipscore API
