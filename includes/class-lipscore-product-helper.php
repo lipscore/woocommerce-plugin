@@ -17,7 +17,8 @@ class Lipscore_Product_Helper {
             'image_url'    => $this->image_url( $product ),
             'price'        => $product->get_price(),
             'currency'     => get_woocommerce_currency(),
-            'category'     => $this->product_category( $product )
+            'category'     => $this->product_category( $product ),
+            'gtin'         => $this->product_gtin( $product )
         );
     }
 
@@ -36,6 +37,21 @@ class Lipscore_Product_Helper {
         } else {
             return current( $terms )->name;
         }
+    }
+
+    protected function product_gtin( $product ) {
+        $gtin_attr = Lipscore_Settings::gtin_attr();
+
+        if (!$gtin_attr) {
+            return '';
+        }
+
+        $gtin = $product->get_attribute($gtin_attr);
+        if (!$gtin) {
+            $gtin = get_post_meta($product->get_id(), $gtin_attr, true);
+        }
+
+        return $gtin;
     }
 
     protected function image_url ( $product ) {

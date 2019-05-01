@@ -16,7 +16,8 @@ class Lipscore_Widget_Helper {
             'ls-image-url'      => $productData['image_url'],
             'ls-price'          => $productData['price'],
             'ls-price-currency' => $productData['currency'],
-            'ls-category'       => $productData['category']
+            'ls-category'       => $productData['category'],
+            'ls-gtin'           => $productData['gtin']
         );
         return static::to_string( $attrs );
     }

@@ -38,6 +38,10 @@ class Lipscore_Admin_Settings_Tab {
         $settings['locale']        = $this->locale_setting();
         $settings['general_end']   = $this->general_section_end();
 
+        $settings['product_attrs_title']       = $this->product_attrs_title();
+        $settings['gtin']                      = $this->gtin_setting();
+        $settings['product_attrs_section_end'] = $this->product_attrs_section_end();
+
         $settings['emails_title'] = $this->emails_title();
         $settings['order_status'] = $this->order_status_setting();
         $settings['emails_end']   = $this->emails_section_end();
@@ -109,11 +113,51 @@ class Lipscore_Admin_Settings_Tab {
         );
     }
 
-
     protected function general_section_end() {
         return array(
             'type' => 'sectionend',
             'id'   => 'lipscore_general_section_end'
+        );
+    }
+
+    protected function product_attrs_title() {
+        return array(
+            'name' => __( 'Product Attributes', 'woocommerce-settings-tab-lipscore' ),
+            'type' => 'title',
+            'id'   => 'lipscore_product_attrs_title'
+        );
+    }
+
+    protected function gtin_setting() {
+        $options = array( '' => __( '&mdash; Select &mdash;', 'woocommerce-settings-tab-lipscore' ) );
+
+        $attributes = wc_get_attribute_taxonomies();
+        foreach ( $attributes as $attribute ) {
+            $options[$attribute->attribute_name] = $attribute->attribute_label;
+        }
+
+        global $wpdb;
+        $post_meta_keys = $wpdb->get_col("SELECT DISTINCT meta_key FROM {$wpdb->postmeta} ORDER BY meta_key");
+        foreach ( $post_meta_keys as $post_meta_key ) {
+            if ( '_' == $post_meta_key[0] ) {
+                $post_meta_key = substr_replace($post_meta_key, '', 0, 1);
+            }
+            $options[$post_meta_key] = __( $post_meta_key, 'woocommerce' );
+        }
+
+        return array(
+            'name'    => __( 'GTIN attribute', 'woocommerce-settings-tab-lipscore' ),
+            'type'    => 'select',
+            'id'      => 'lipscore_gtin',
+            'default' => '',
+            'options' => $options
+        );
+    }
+
+    protected function product_attrs_section_end() {
+        return array(
+            'type' => 'sectionend',
+            'id'   => 'lipscore_product_attrs_section_end'
         );
     }
 

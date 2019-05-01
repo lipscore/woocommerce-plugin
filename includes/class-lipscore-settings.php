@@ -12,6 +12,7 @@ class Lipscore_Settings {
     const DEFAULT_ORDER_STATUS         = 'wc-completed';
     const DEFAULT_COUPON_CODE          = '';
     const DEFAULT_COUPON_DESCRIPTION   = '';
+    const DEFAULT_GTIN                 = '';
 
     public static function api_key() {
         return get_option( 'lipscore_api_key', self::DEFAULT_API_KEY );
@@ -23,6 +24,10 @@ class Lipscore_Settings {
 
     public static function locale() {
         return get_option( 'lipscore_locale', self::DEFAULT_LOCALE );
+    }
+
+    public static function gtin_attr() {
+        return get_option( 'lipscore_gtin', self::DEFAULT_GTIN );
     }
 
     public static function order_status() {
