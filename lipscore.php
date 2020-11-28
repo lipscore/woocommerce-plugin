@@ -151,7 +151,7 @@ final class Lipscore {
 		$this->url      = plugin_dir_url( __FILE__ );
 		$this->path     = plugin_dir_path( __FILE__ );
 
-        $this->config = new Lipscore_Config();
+    $this->config = new Lipscore_Config();
 	}
 
 	/**
@@ -221,10 +221,21 @@ final class Lipscore {
             array( $widget_manager, 'add_reviews_tab' ),
             6
         );
+				add_action(
+            'woocommerce_product_tabs',
+            array( $widget_manager, 'add_questions_tab' ),
+            7
+        );
         add_filter(
             'comments_template',
             array( $widget_manager, 'show_reviews_instead_comments' ),
             10,
+            2
+        );
+				add_filter(
+            'comments_template',
+            array( $widget_manager, 'show_questions_instead_comments' ),
+            11,
             2
         );
         add_action(
@@ -264,8 +275,27 @@ final class Lipscore {
             10,
             2
         );
+
+				add_filter(
+						'plugin_action_links_' . $this->basename,
+						array( __CLASS__, 'plugin_action_links' )
+				);
 	}
 
+	/**
+	 * Show action links on the plugin screen.
+	 *
+	 * @param mixed $links Plugin Action links.
+	 *
+	 * @return array
+	 */
+	public static function plugin_action_links( $links ) {
+		$action_links = array(
+			'settings' => '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=settings_tab_lipscore' ) . '" aria-label="' . esc_attr__( 'View Lipscore settings', 'lipscore' ) . '">' . esc_html__( 'Settings' ) . '</a>',
+		);
+
+		return array_merge( $action_links, $links );
+	}
 
 	/**
 	 * Activate the plugin
