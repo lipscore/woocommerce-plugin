@@ -35,3 +35,7 @@
 
 ### 0.3.0 ###
 * Support GTIN
+
+### 0.4.0 ###
+* Support Q&A
+* Add Settings link to plugin information
