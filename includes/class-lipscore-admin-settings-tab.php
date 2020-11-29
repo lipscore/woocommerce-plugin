@@ -52,6 +52,11 @@ class Lipscore_Admin_Settings_Tab {
 
         $settings['coupons_end']   = $this->coupons_section_end();
 
+				$settings['appearance_title']   = $this->appearance_title();
+				$settings['disaplay_reviews']   = $this->disaplay_reviews_setting();
+				$settings['disaplay_questions'] = $this->disaplay_questions_setting();
+				$settings['appearance_end']     = $this->appearance_section_end();
+
         return apply_filters( 'wc_settings_tab_lipscore_settings', $settings );
     }
 
@@ -176,7 +181,7 @@ class Lipscore_Admin_Settings_Tab {
         return array(
             'name'      => __( 'Order status', 'woocommerce-settings-tab-lipscore' ),
             'type'      => 'select',
-            'desc'      => 'Send emails for orders in this status',
+            'desc'      => 'Create Lipscore review invitation emails when orders reach this status',
             'id'        => 'lipscore_order_status',
             'default'   => Lipscore_Settings::DEFAULT_ORDER_STATUS,
             'options'   => $statuses
@@ -218,6 +223,39 @@ class Lipscore_Admin_Settings_Tab {
     }
 
     protected function coupons_section_end() {
+        return array(
+            'type' => 'sectionend',
+            'id'   => 'lipscore_coupons_section_end'
+        );
+    }
+
+		protected function appearance_title() {
+        return array(
+            'name'     => __( 'Appearance', 'woocommerce-settings-tab-lipscore' ),
+            'type'     => 'title',
+            'id'       => 'lipscore_appearance_title'
+        );
+    }
+
+    protected function disaplay_reviews_setting() {
+        return array(
+            'name'      => __( 'Display ratings and reviews', 'woocommerce-settings-tab-lipscore' ),
+            'type'      => 'checkbox',
+            'id'        => 'lipscore_disaplay_reviews',
+            'default'   => Lipscore_Settings::DEFAULT_DISPLAY_REVIEWS
+        );
+    }
+
+    protected function disaplay_questions_setting() {
+        return array(
+            'name'      => __( 'Display Q&A', 'woocommerce-settings-tab-lipscore' ),
+            'type'      => 'checkbox',
+            'id'        => 'lipscore_disaplay_questions',
+            'default'   => Lipscore_Settings::DEFAULT_DISPLAY_QUESTIONS
+        );
+    }
+
+    protected function appearance_section_end() {
         return array(
             'type' => 'sectionend',
             'id'   => 'lipscore_coupons_section_end'

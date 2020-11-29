@@ -206,38 +206,45 @@ final class Lipscore {
         );
 
         $widget_manager = new Lipscore_Widget_Manager();
-        add_action(
-            'woocommerce_after_shop_loop_item_title',
-            array( $widget_manager, 'add_small_rating' ),
-            1
-        );
-        add_action(
-            'woocommerce_single_product_summary',
-            array( $widget_manager, 'add_rating' ),
-            6
-        );
-        add_action(
-            'woocommerce_product_tabs',
-            array( $widget_manager, 'add_reviews_tab' ),
-            6
-        );
-				add_action(
-            'woocommerce_product_tabs',
-            array( $widget_manager, 'add_questions_tab' ),
-            7
-        );
-        add_filter(
-            'comments_template',
-            array( $widget_manager, 'show_reviews_instead_comments' ),
-            10,
-            2
-        );
-				add_filter(
-            'comments_template',
-            array( $widget_manager, 'show_questions_instead_comments' ),
-            11,
-            2
-        );
+
+				if ( Lipscore_Settings::is_reviews_displayed() ) {
+					add_action(
+							'woocommerce_after_shop_loop_item_title',
+							array( $widget_manager, 'add_small_rating' ),
+							1
+					);
+					add_action(
+							'woocommerce_single_product_summary',
+							array( $widget_manager, 'add_rating' ),
+							6
+					);
+	        add_action(
+	            'woocommerce_product_tabs',
+	            array( $widget_manager, 'add_reviews_tab' ),
+	            6
+	        );
+					add_filter(
+	            'comments_template',
+	            array( $widget_manager, 'show_reviews_instead_comments' ),
+	            10,
+	            2
+	        );
+				}
+
+				if ( Lipscore_Settings::is_questions_displayed() ) {
+					add_action(
+	            'woocommerce_product_tabs',
+	            array( $widget_manager, 'add_questions_tab' ),
+	            7
+	        );
+					add_filter(
+	            'comments_template',
+	            array( $widget_manager, 'show_questions_instead_comments' ),
+	            11,
+	            2
+	        );
+				}
+
         add_action(
             'wp_head',
             array( $widget_manager, 'add_styles' ),

@@ -7,12 +7,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'Lipscore_Settings' ) ) :
 
 class Lipscore_Settings {
-    const DEFAULT_API_KEY              = '8d11d10169159ba3da361b61';
-    const DEFAULT_LOCALE               = 'en';
-    const DEFAULT_ORDER_STATUS         = 'wc-completed';
-    const DEFAULT_COUPON_CODE          = '';
-    const DEFAULT_COUPON_DESCRIPTION   = '';
-    const DEFAULT_GTIN                 = '';
+    const DEFAULT_API_KEY            = '8d11d10169159ba3da361b61';
+    const DEFAULT_LOCALE             = 'en';
+    const DEFAULT_ORDER_STATUS       = 'wc-completed';
+    const DEFAULT_COUPON_CODE        = '';
+    const DEFAULT_COUPON_DESCRIPTION = '';
+    const DEFAULT_GTIN               = '';
+		const DEFAULT_DISPLAY_REVIEWS    = 'yes';
+		const DEFAULT_DISPLAY_QUESTIONS  = 'no';
 
     public static function api_key() {
         return get_option( 'lipscore_api_key', self::DEFAULT_API_KEY );
@@ -46,8 +48,12 @@ class Lipscore_Settings {
         return self::DEFAULT_API_KEY == self::api_key();
     }
 
-    public static function is_valid_api_key() {
-        return self::api_key() && !self::is_default_api_key();
+    public static function is_reviews_displayed() {
+        return get_option( 'lipscore_disaplay_reviews', self::DEFAULT_DISPLAY_REVIEWS ) == 'yes';
+    }
+
+		public static function is_questions_displayed() {
+        return get_option( 'lipscore_disaplay_questions', self::DEFAULT_DISPLAY_QUESTIONS ) == 'yes';
     }
 }
 

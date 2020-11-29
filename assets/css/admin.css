@@ -2,6 +2,6 @@
     display: block;
 }
 
-.lipscore-settings input, select, textarea {
-    width: 300px
+.lipscore-settings input[type="text"], select, textarea {
+    width: 300px;
 }
