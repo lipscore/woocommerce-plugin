@@ -39,3 +39,6 @@
 ### 0.4.0 ###
 * Support Q&A
 * Add Settings link to plugin information
+
+### 0.4.1 ###
+* Add separate review and rating display settings
