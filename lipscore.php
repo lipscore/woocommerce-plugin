@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Plugin Name: Lipscore Ratings and Reviews
  * Plugin URI:  http://lipscore.com/
  * Description: Collecting reviews is difficult. Let the most efficient and flexible plugin in the world do it for you.
- * Version:     0.4.0
+ * Version:     0.4.1
  * Author:      Lipscore
  * Author URI:  http://lipscore.com/
  * Donate link: http://lipscore.com/
@@ -19,11 +19,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @link http://lipscore.com/
  *
  * @package lipscore
- * @version 0.4.0
+ * @version 0.4.1
  */
 
 /**
- * Copyright (c) 2016 Lipscore (email : support@lipscore.com)
+ * Copyright (c) 2020 Lipscore (email : support@lipscore.com)
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License, version 2 or, at
@@ -80,7 +80,7 @@ final class Lipscore {
 	 * @var  string
 	 * @since  0.1.0
 	 */
-	const VERSION = '0.4.0';
+	const VERSION = '0.4.1';
 
 	/**
 	 * URL of plugin directory
@@ -207,7 +207,7 @@ final class Lipscore {
 
         $widget_manager = new Lipscore_Widget_Manager();
 
-				if ( Lipscore_Settings::is_reviews_displayed() ) {
+				if ( Lipscore_Settings::is_ratings_displayed() ) {
 					add_action(
 							'woocommerce_after_shop_loop_item_title',
 							array( $widget_manager, 'add_small_rating' ),
@@ -218,6 +218,9 @@ final class Lipscore {
 							array( $widget_manager, 'add_rating' ),
 							6
 					);
+				}
+
+				if ( Lipscore_Settings::is_reviews_displayed() ) {
 	        add_action(
 	            'woocommerce_product_tabs',
 	            array( $widget_manager, 'add_reviews_tab' ),

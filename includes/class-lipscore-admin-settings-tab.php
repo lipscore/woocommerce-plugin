@@ -53,6 +53,7 @@ class Lipscore_Admin_Settings_Tab {
         $settings['coupons_end']   = $this->coupons_section_end();
 
 				$settings['appearance_title']   = $this->appearance_title();
+				$settings['disaplay_ratings']   = $this->disaplay_ratings_setting();
 				$settings['disaplay_reviews']   = $this->disaplay_reviews_setting();
 				$settings['disaplay_questions'] = $this->disaplay_questions_setting();
 				$settings['appearance_end']     = $this->appearance_section_end();
@@ -237,9 +238,18 @@ class Lipscore_Admin_Settings_Tab {
         );
     }
 
+		protected function disaplay_ratings_setting() {
+        return array(
+            'name'      => __( 'Display ratings', 'woocommerce-settings-tab-lipscore' ),
+            'type'      => 'checkbox',
+            'id'        => 'lipscore_disaplay_ratings',
+            'default'   => Lipscore_Settings::DEFAULT_DISPLAY_RATINGS
+        );
+    }
+
     protected function disaplay_reviews_setting() {
         return array(
-            'name'      => __( 'Display ratings and reviews', 'woocommerce-settings-tab-lipscore' ),
+            'name'      => __( 'Display reviews', 'woocommerce-settings-tab-lipscore' ),
             'type'      => 'checkbox',
             'id'        => 'lipscore_disaplay_reviews',
             'default'   => Lipscore_Settings::DEFAULT_DISPLAY_REVIEWS

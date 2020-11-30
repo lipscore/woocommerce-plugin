@@ -13,6 +13,7 @@ class Lipscore_Settings {
     const DEFAULT_COUPON_CODE        = '';
     const DEFAULT_COUPON_DESCRIPTION = '';
     const DEFAULT_GTIN               = '';
+		const DEFAULT_DISPLAY_RATINGS    = 'yes';
 		const DEFAULT_DISPLAY_REVIEWS    = 'yes';
 		const DEFAULT_DISPLAY_QUESTIONS  = 'no';
 
@@ -46,6 +47,10 @@ class Lipscore_Settings {
 
     public static function is_default_api_key() {
         return self::DEFAULT_API_KEY == self::api_key();
+    }
+
+		public static function is_ratings_displayed() {
+        return get_option( 'lipscore_disaplay_ratings', self::DEFAULT_DISPLAY_RATINGS ) == 'yes';
     }
 
     public static function is_reviews_displayed() {
