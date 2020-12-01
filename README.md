@@ -42,3 +42,6 @@
 
 ### 0.4.1 ###
 * Add separate review and rating display settings
+
+### 0.4.2 ###
+* Fix API key validation issue

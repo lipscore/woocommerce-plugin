@@ -49,6 +49,10 @@ class Lipscore_Settings {
         return self::DEFAULT_API_KEY == self::api_key();
     }
 
+		public static function is_valid_api_key() {
+		    return self::api_key() && !self::is_default_api_key();
+		}
+
 		public static function is_ratings_displayed() {
         return get_option( 'lipscore_disaplay_ratings', self::DEFAULT_DISPLAY_RATINGS ) == 'yes';
     }

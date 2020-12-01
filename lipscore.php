@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Plugin Name: Lipscore Ratings and Reviews
  * Plugin URI:  http://lipscore.com/
  * Description: Collecting reviews is difficult. Let the most efficient and flexible plugin in the world do it for you.
- * Version:     0.4.1
+ * Version:     0.4.2
  * Author:      Lipscore
  * Author URI:  http://lipscore.com/
  * Donate link: http://lipscore.com/
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @link http://lipscore.com/
  *
  * @package lipscore
- * @version 0.4.1
+ * @version 0.4.2
  */
 
 /**
@@ -80,7 +80,7 @@ final class Lipscore {
 	 * @var  string
 	 * @since  0.1.0
 	 */
-	const VERSION = '0.4.1';
+	const VERSION = '0.4.2';
 
 	/**
 	 * URL of plugin directory
