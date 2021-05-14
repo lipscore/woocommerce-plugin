@@ -27,20 +27,20 @@ class Lipscore_Order_Reminder {
     }
 
     public function order_data( $order ) {
-        if ( $order->shipping_first_name || $order->shipping_last_name ) {
-            $buyer_first_name = $order->shipping_first_name;
-            $buyer_last_name  = $order->shipping_last_name;
+        if ( $order->get_shipping_first_name() || $order->get_shipping_last_name() ) {
+            $buyer_first_name = $order->get_shipping_first_name();
+            $buyer_last_name  = $order->get_shipping_last_name();
         } else {
-            $buyer_first_name = $order->billing_first_name;
-            $buyer_last_name  = $order->billing_last_name;
+            $buyer_first_name = $order->get_billing_first_name();
+            $buyer_last_name  = $order->get_billing_last_name();
         }
 
         return array(
-            'buyer_email'      => $order->billing_email,
+            'buyer_email'      => $order->get_billing_email(),
             'buyer_name'       => sprintf( '%s %s', $buyer_first_name, $buyer_last_name ),
             'discount_descr'   => Lipscore_Settings::coupon_description(),
             'discount_voucher' => Lipscore_Settings::coupon_code(),
-            'purchased_at'     => (int) strtotime( $order->order_date ),
+            'purchased_at'     => (int) strtotime( $order->get_order_date() ),
             'lang'             => Lipscore_Settings::locale()
         );
     }
