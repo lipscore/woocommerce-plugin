@@ -62,17 +62,13 @@ class Lipscore_Widget_Manager {
     }
 
     public function add_styles() {
-        if ( Lipscore::is_woocommerce() ) {
-            wp_enqueue_style( 'lipscore-styles', Lipscore::assets_url( 'css/widget.css' ), array(), Lipscore::VERSION );
-        }
+        wp_enqueue_style( 'lipscore-styles', Lipscore::assets_url( 'css/widget.css' ), array(), Lipscore::VERSION );
     }
 
     public function add_scripts() {
-        if ( Lipscore::is_woocommerce() ) {
-            wp_enqueue_script(
-                'lipscore-js', Lipscore::assets_url( 'js/widget.js' ), array( 'jquery' ), Lipscore::VERSION, true
-            );
-        }
+        wp_enqueue_script(
+            'lipscore-js', Lipscore::assets_url( 'js/widget.js' ), array( 'jquery' ), Lipscore::VERSION, true
+        );
     }
 
     public function reviews_tab_content() {

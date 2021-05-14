@@ -8,10 +8,6 @@ if ( ! class_exists( 'Lipscore_Initializer' ) ) :
 
 class Lipscore_Initializer {
     public function add_script() {
-        if ( ! Lipscore::is_woocommerce() ) {
-            return;
-        }
-
         $api_key   = Lipscore_Settings::api_key();
         $assetsUrl = lipscore()->config->assets_url();
         $locale    = Lipscore_Settings::locale();
