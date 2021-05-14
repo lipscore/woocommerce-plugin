@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Plugin Name: Lipscore Ratings and Reviews
  * Plugin URI:  http://lipscore.com/
  * Description: Collecting reviews is difficult. Let the most efficient and flexible plugin in the world do it for you.
- * Version:     0.4.2
+ * Version:     0.4.3
  * Author:      Lipscore
  * Author URI:  http://lipscore.com/
  * Donate link: http://lipscore.com/
@@ -19,11 +19,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @link http://lipscore.com/
  *
  * @package lipscore
- * @version 0.4.2
+ * @version 0.4.3
  */
 
 /**
- * Copyright (c) 2020 Lipscore (email : support@lipscore.com)
+ * Copyright (c) 2021 Lipscore (email : support@lipscore.com)
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License, version 2 or, at
@@ -80,7 +80,7 @@ final class Lipscore {
 	 * @var  string
 	 * @since  0.1.0
 	 */
-	const VERSION = '0.4.2';
+	const VERSION = '0.4.3';
 
 	/**
 	 * URL of plugin directory
@@ -495,10 +495,6 @@ final class Lipscore {
 
     public static function assets_url( $path = '' ) {
         return static::url( 'assets/' . $path );
-    }
-
-    public static function is_woocommerce() {
-        return function_exists( 'is_woocommerce' ) && ( is_woocommerce() || is_cart() || is_checkout() );
     }
 
     public function fix_lipscore_locale_option( $value, $option) {
