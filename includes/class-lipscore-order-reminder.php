@@ -40,7 +40,7 @@ class Lipscore_Order_Reminder {
             'buyer_name'       => sprintf( '%s %s', $buyer_first_name, $buyer_last_name ),
             'discount_descr'   => Lipscore_Settings::coupon_description(),
             'discount_voucher' => Lipscore_Settings::coupon_code(),
-            'purchased_at'     => (int) strtotime( $order->get_order_date() ),
+            'purchased_at'     => (int) strtotime( $order->get_date_created() ),
             'lang'             => Lipscore_Settings::locale()
         );
     }
