@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Plugin Name: Lipscore Ratings and Reviews
  * Plugin URI:  http://lipscore.com/
  * Description: Collecting reviews is difficult. Let the most efficient and flexible plugin in the world do it for you.
- * Version:     0.4.3
+ * Version:     0.4.4
  * Author:      Lipscore
  * Author URI:  http://lipscore.com/
  * Donate link: http://lipscore.com/
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @link http://lipscore.com/
  *
  * @package lipscore
- * @version 0.4.3
+ * @version 0.4.4
  */
 
 /**
@@ -80,7 +80,7 @@ final class Lipscore {
 	 * @var  string
 	 * @since  0.1.0
 	 */
-	const VERSION = '0.4.3';
+	const VERSION = '0.4.4';
 
 	/**
 	 * URL of plugin directory
@@ -290,6 +290,13 @@ final class Lipscore {
 						'plugin_action_links_' . $this->basename,
 						array( __CLASS__, 'plugin_action_links' )
 				);
+
+				add_filter(
+						'load_textdomain_mofile',
+						array( $this, 'load_custom_plugin_translation_file' ),
+						10,
+						2
+				);
 	}
 
 	/**
@@ -493,17 +500,24 @@ final class Lipscore {
 		return $url . $path;
 	}
 
-    public static function assets_url( $path = '' ) {
-        return static::url( 'assets/' . $path );
-    }
+  public static function assets_url( $path = '' ) {
+      return static::url( 'assets/' . $path );
+  }
 
-    public function fix_lipscore_locale_option( $value, $option) {
-        if ( $value == 'auto' ) {
-            return Lipscore_Settings::DEFAULT_LOCALE;
-        } else {
-            return $value;
-        }
-    }
+  public function fix_lipscore_locale_option( $value, $option) {
+      if ( $value == 'auto' ) {
+          return Lipscore_Settings::DEFAULT_LOCALE;
+      } else {
+          return $value;
+      }
+  }
+
+	function load_custom_plugin_translation_file( $mofile, $domain ) {
+	  if ( 'lipscore' === $domain ) {
+	    $mofile = self::dir( 'languages/lipscore-' . get_locale() . '.mo' );
+	  }
+	  return $mofile;
+	}
 }
 
 /**
