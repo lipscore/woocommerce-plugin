@@ -87,7 +87,7 @@ class Lipscore_Widget_Manager {
         return $this->render_widget( 'questions_title' );
     }
 
-    protected function render_widget( $file, $args = array() ) {
+    public function render_widget( $file, $args = array() ) {
         $template = new Lipscore_Template($file, $args);
         $template->render();
     }
