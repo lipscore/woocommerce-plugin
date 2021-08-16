@@ -299,7 +299,6 @@ final class Lipscore {
 				);
 
 				$shortcode_manager = Lipscore_Shortcode_Manager::get_instance();
-		
 				add_action( 'init', [ $shortcode_manager, 'register_shortcodes' ] );
 	}
 
