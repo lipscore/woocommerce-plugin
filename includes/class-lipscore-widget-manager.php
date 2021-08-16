@@ -34,7 +34,7 @@ class Lipscore_Widget_Manager {
         return $tabs;
     }
 
-		public function add_questions_tab( $tabs = array() ) {
+    public function add_questions_tab( $tabs = array() ) {
         add_filter(
             'woocommerce_product_lipscorequestions_tab_title',
             array( $this, 'add_html_to_questions_tab_title' ),
@@ -55,7 +55,7 @@ class Lipscore_Widget_Manager {
         }
     }
 
-		public function show_questions_instead_comments($comment_template) {
+    public function show_questions_instead_comments($comment_template) {
         if ( function_exists( 'is_woocommerce' ) && is_woocommerce() && is_singular() ) {
             return Lipscore::dir( 'templates/questions_single_widget' . '.php' );
         }
@@ -75,7 +75,7 @@ class Lipscore_Widget_Manager {
         $this->render_widget( 'reviews_widget' );
     }
 
-		public function questions_tab_content() {
+    public function questions_tab_content() {
         $this->render_widget( 'questions_widget' );
     }
 
@@ -83,7 +83,7 @@ class Lipscore_Widget_Manager {
         return $this->render_widget( 'reviews_title' );
     }
 
-		public function add_html_to_questions_tab_title( $title ) {
+    public function add_html_to_questions_tab_title( $title ) {
         return $this->render_widget( 'questions_title' );
     }
 
