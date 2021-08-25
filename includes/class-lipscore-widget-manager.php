@@ -19,6 +19,12 @@ class Lipscore_Widget_Manager {
         echo "</div>";
     }
 
+    public function add_rating_slider() {
+        echo "<div class=\"lipscore-wc-loop-rating\">";
+        $this->render_widget( 'rating_widget', array( 'rating_type' => 'class="lipscore-rating-slider"' ) );
+        echo "</div>";
+    }
+
     public function add_reviews_tab( $tabs = array() ) {
         add_filter(
             'woocommerce_product_lipscorereviews_tab_title',
