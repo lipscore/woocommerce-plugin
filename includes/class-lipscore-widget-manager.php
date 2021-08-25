@@ -93,6 +93,10 @@ class Lipscore_Widget_Manager {
         return $this->render_widget( 'questions_title' );
     }
 
+    public function add_testimonial_widget() {
+        return $this->render_widget( 'testimonial_widget' );
+    }
+
     public function render_widget( $file, $args = array() ) {
         $template = new Lipscore_Template($file, $args);
         $template->render();
