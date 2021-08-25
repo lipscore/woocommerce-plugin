@@ -101,6 +101,10 @@ class Lipscore_Widget_Manager {
         return $this->render_widget( 'service_review_badge', array( 'width'=> '50px', 'height' => '50px' ) );
     }
 
+    public function add_testimonial_banner() {
+        return $this->render_widget( 'testimonial_banner', array( 'width'=> '100%', 'height' => '150px' ) );
+    }
+
     public function render_widget( $file, $args = array() ) {
         $template = new Lipscore_Template($file, $args);
         $template->render();

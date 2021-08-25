@@ -29,6 +29,7 @@ class Lipscore_Shortcode_Manager {
         add_shortcode( 'lipscore-questions', [ $this, 'render_questions_widget' ] );
         add_shortcode( 'lipscore-testimonial', [ $this, 'render_testimonial_widget' ] );
         add_shortcode( 'lipscore-service-review-badge', [ $this, 'render_service_review_badge' ] );
+        add_shortcode( 'lipscore-testimonial-banner', [ $this, 'render_testimonial_banner' ] );
     }
 
     public function render_small_rating_widget() {
@@ -81,6 +82,20 @@ class Lipscore_Shortcode_Manager {
         ob_start();
 
         $this->widget_manager->render_widget( 'service_review_badge', [ 'width' => $atts['width'], 'height' => $atts['height'], 'class' => $atts['class'] ] );
+
+        return ob_get_clean();
+    }
+
+    public function render_testimonial_banner( $atts ) {
+        $atts = shortcode_atts( [
+            'width' => '100%',
+            'height' => '150px',
+            'class' => ''
+        ], $atts );
+
+        ob_start();
+
+        $this->widget_manager->render_widget( 'testimonial_banner', [ 'width' => $atts['width'], 'height' => $atts['height'], 'class' => $atts['class'] ] );
 
         return ob_get_clean();
     }
