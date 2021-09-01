@@ -74,9 +74,9 @@ class Lipscore_Shortcode_Manager {
 
     public function render_service_review_badge_widget( $atts ) {
         $atts = shortcode_atts( [
-            'width' => '50px',
+            'width'  => '50px',
             'height' => '50px',
-            'class' => ''
+            'class'  => ''
         ], $atts );
 
         ob_start();
@@ -88,9 +88,9 @@ class Lipscore_Shortcode_Manager {
 
     public function render_testimonial_banner_widget( $atts ) {
         $atts = shortcode_atts( [
-            'width' => '100%',
+            'width'  => '100%',
             'height' => '150px',
-            'class' => ''
+            'class'  => ''
         ], $atts );
 
         ob_start();
