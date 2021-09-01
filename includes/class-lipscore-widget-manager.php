@@ -93,11 +93,11 @@ class Lipscore_Widget_Manager {
         return $this->render_widget( 'questions_title' );
     }
 
-    public function add_testimonial_widget() {
+    public function add_testimonial() {
         return $this->render_widget( 'testimonial_widget' );
     }
 
-    public function add_service_review_badge_widget() {
+    public function add_service_review_badge() {
         return $this->render_widget( 'service_review_badge', array( 'width'=> '50px', 'height' => '50px' ) );
     }
 
