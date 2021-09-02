@@ -35,7 +35,14 @@ class Lipscore_Product_Helper {
         if ( is_wp_error( $terms ) || empty( $terms ) || !is_array( $terms ) ) {
             return '';
         } else {
-            return current( $terms )->name;
+            $terms_names = array_map(
+                function( $term ) {
+                    return $term->name;
+                },
+                $terms
+            );
+
+            return implode( ', ', $terms_names );
         }
     }
 
