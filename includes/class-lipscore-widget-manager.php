@@ -94,7 +94,7 @@ class Lipscore_Widget_Manager {
     }
 
     public function add_testimonial() {
-        return $this->render_widget( 'testimonial_widget' );
+        return $this->render_widget( 'testimonial' );
     }
 
     public function add_service_review_badge() {

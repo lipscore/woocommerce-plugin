@@ -67,7 +67,7 @@ class Lipscore_Shortcode_Manager {
     public function render_testimonial_widget() {
         ob_start();
 
-        $this->widget_manager->render_widget( 'testimonial_widget' );
+        $this->widget_manager->render_widget( 'testimonial' );
 
         return ob_get_clean();
     }
