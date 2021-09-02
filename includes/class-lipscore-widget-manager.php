@@ -19,6 +19,12 @@ class Lipscore_Widget_Manager {
         echo "</div>";
     }
 
+    public function add_rating_slider() {
+        echo "<div class=\"lipscore-wc-loop-rating\">";
+        $this->render_widget( 'rating_widget', array( 'rating_type' => 'class="lipscore-rating-slider"' ) );
+        echo "</div>";
+    }
+
     public function add_reviews_tab( $tabs = array() ) {
         add_filter(
             'woocommerce_product_lipscorereviews_tab_title',
@@ -85,6 +91,18 @@ class Lipscore_Widget_Manager {
 
     public function add_html_to_questions_tab_title( $title ) {
         return $this->render_widget( 'questions_title' );
+    }
+
+    public function add_testimonial() {
+        return $this->render_widget( 'testimonial' );
+    }
+
+    public function add_service_review_badge() {
+        return $this->render_widget( 'service_review_badge', array( 'width'=> '50px', 'height' => '50px' ) );
+    }
+
+    public function add_testimonial_banner() {
+        return $this->render_widget( 'testimonial_banner', array( 'width'=> '100%', 'height' => '150px' ) );
     }
 
     public function render_widget( $file, $args = array() ) {
