@@ -3,7 +3,7 @@
 **Tags:**  
 **Requires at least:** 4.4  
 **Tested up to:**      7.3
-**Stable tag:**        0.4.4
+**Stable tag:**        0.5
 **License:**           GPLv2  
 **License URI:**       http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -52,3 +52,7 @@
 
 ### 0.4.4 ###
 * Add translations for "Questions" tab
+
+### 0.5 ###
+* Fixed the issue with GTIN meta keys having underscore in its name
+* Added variable products support to the orders reminder
