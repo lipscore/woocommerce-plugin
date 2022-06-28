@@ -144,10 +144,8 @@ class Lipscore_Admin_Settings_Tab {
 
         global $wpdb;
         $post_meta_keys = $wpdb->get_col("SELECT DISTINCT meta_key FROM {$wpdb->postmeta} ORDER BY meta_key");
+        
         foreach ( $post_meta_keys as $post_meta_key ) {
-            if ( '_' == $post_meta_key[0] ) {
-                $post_meta_key = substr_replace($post_meta_key, '', 0, 1);
-            }
             $options[$post_meta_key] = __( $post_meta_key, 'woocommerce' );
         }
 
