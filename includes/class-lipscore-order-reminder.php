@@ -45,16 +45,16 @@ class Lipscore_Order_Reminder {
         );
     }
 
-    protected function products_data( $order ) {
+    public function products_data( $order ) {
         $products_data = array();
 
         $items = $order->get_items();
-        foreach ($items as $item) {
-            $product = new WC_Product( $item[ 'product_id' ] );
-            if ( ! $product ) {
-                continue;
-            }
-            $products_data[ $product->get_id() ] = $this->products_helper->product_data( $product );
+		
+        foreach ($items as $item_id => $item) {
+            $product_id = $item->get_product_id();
+			$product = $item->get_product();
+			
+            $products_data[ $product_id ] = $this->products_helper->product_data( $product );
         }
 
         return array_values( $products_data );

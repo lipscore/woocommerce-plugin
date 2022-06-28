@@ -8,11 +8,21 @@ if ( ! class_exists( 'Lipscore_Product_Helper' ) ) :
 
 class Lipscore_Product_Helper {
     public function product_data( $product ) {
+        $parent_product_id = (int) $product->get_parent_id();
+		
+		if ( $parent_product_id > 0 ) {
+			$product_name = $product->get_name();
+			$internal_id = $parent_product_id;
+		} else {
+			$product_name = $product->get_title();
+			$internal_id = $product->get_id();
+		}
+
         return array(
-            'name'         => $product->get_title(),
+            'name'         => $product_name,
             'brand'        => '',
             'sku_values'   => [$product->get_sku()],
-            'internal_id'  => (string) $product->get_id(),
+            'internal_id'  => $internal_id,
             'url'          => get_permalink($product->get_id()),
             'image_url'    => $this->image_url( $product ),
             'price'        => $product->get_price(),
