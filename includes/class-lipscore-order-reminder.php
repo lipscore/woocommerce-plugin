@@ -49,11 +49,11 @@ class Lipscore_Order_Reminder {
         $products_data = array();
 
         $items = $order->get_items();
-		
+        
         foreach ($items as $item_id => $item) {
             $product_id = $item->get_product_id();
-			$product = $item->get_product();
-			
+            $product = $item->get_product();
+
             $products_data[ $product_id ] = $this->products_helper->product_data( $product );
         }
 
