@@ -68,6 +68,11 @@ class Lipscore_Product_Helper {
             $gtin = get_post_meta($product->get_id(), $gtin_attr, true);
         }
 
+        if($gtin){
+
+            $gtin = explode( ', ', $gtin );
+        }
+
         return $gtin;
     }
 
