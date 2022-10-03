@@ -9,15 +9,15 @@ if ( ! class_exists( 'Lipscore_Widget_Helper' ) ) :
 class Lipscore_Widget_Helper {
     public function product_attrs( $productData ) {
         $attrs = array(
-            'ls-product-name'   => $productData['name'],
-            'ls-brand'          => $productData['brand'],
-            'ls-sku'            => implode( ';', $productData['sku_values'] ),
-            'ls-product-id'     => $productData['internal_id'],
-            'ls-image-url'      => $productData['image_url'],
-            'ls-price'          => $productData['price'],
-            'ls-price-currency' => $productData['currency'],
-            'ls-category'       => $productData['category'],
-            'ls-gtin'           => $productData['gtin']
+            'data-ls-product-name'   => $productData['name'],
+            'data-ls-brand'          => $productData['brand'],
+            'data-ls-sku'            => implode( ';', $productData['sku_values'] ),
+            'data-ls-product-id'     => $productData['internal_id'],
+            'data-ls-image-url'      => $productData['image_url'],
+            'data-ls-price'          => $productData['price'],
+            'data-ls-price-currency' => $productData['currency'],
+            'data-ls-category'       => $productData['category'],
+            'data-ls-gtin'           => implode( ';', $productData['gtin'] )
         );
         return static::to_string( $attrs );
     }

@@ -59,13 +59,17 @@ class Lipscore_Product_Helper {
     protected function product_gtin( $product ) {
         $gtin_attr = Lipscore_Settings::gtin_attr();
 
-        if (!$gtin_attr) {
+        if ( !$gtin_attr ) {
             return '';
         }
 
         $gtin = $product->get_attribute($gtin_attr);
-        if (!$gtin) {
+        if ( !$gtin ) {
             $gtin = get_post_meta($product->get_id(), $gtin_attr, true);
+        }
+
+        if( $gtin ){
+            $gtin = explode( ', ', $gtin );
         }
 
         return $gtin;
