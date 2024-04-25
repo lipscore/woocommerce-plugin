@@ -33,9 +33,8 @@ class Lipscore_Product_Helper {
             'currency'     => get_woocommerce_currency(),
             'category'     => $this->product_category( $product ),
             'gtin'         => $this->product_gtin( $product ),
-            'product_url' => get_permalink( $parent_product_id ),
             'variant_name' => $variant_name,
-            'variant_id' => $variant_id
+            'variant_id'   => $variant_id
         );
     }
 
