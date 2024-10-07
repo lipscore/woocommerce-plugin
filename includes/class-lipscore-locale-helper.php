@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'Lipscore_Locale_Helper' ) ) :
 
 class Lipscore_Locale_Helper {
-    protected static $_available_locales = array('en', 'it', 'no', 'es', 'br', 'ru', 'se', 'cz', 'nl', 'dk', 'ja', 'de', 'fi', 'fr');
+    protected static $_available_locales = array('en', 'it', 'no', 'es', 'br', 'ru', 'se', 'cz', 'nl', 'dk', 'ja', 'de', 'fi', 'fr', 'pl');
 
     public static function shop_locale() {
         $locale_code = get_locale();
