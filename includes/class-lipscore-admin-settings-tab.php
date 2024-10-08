@@ -114,7 +114,8 @@ class Lipscore_Admin_Settings_Tab {
                 'br'   => __( 'Portuguese (Brazil)', 'woocommerce-settings-tab-lipscore' ),
                 'ru'   => __( 'Russian', 'woocommerce-settings-tab-lipscore' ),
                 'es'   => __( 'Spanish', 'woocommerce-settings-tab-lipscore' ),
-                'se'   => __( 'Swedish', 'woocommerce-settings-tab-lipscore' )
+                'se'   => __( 'Swedish', 'woocommerce-settings-tab-lipscore' ),
+                'pl'   => __( 'Polish', 'woocommerce-settings-tab-lipscore' ),
             )
         );
     }
