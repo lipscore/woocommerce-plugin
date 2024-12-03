@@ -13,7 +13,6 @@ $product_data = $this->product_helper->product_data( $product );
 ?>
 
 <?php if ( $this->widget_helper->product_attrs( $product_data ) ) { ?>
-    <div id="lipscore-review-post" <?php echo $this->widget_helper->product_attrs( $product_data ) ?>></div>
     <div id="lipscore-review-list" <?php echo $this->widget_helper->product_attrs( $product_data ) ?>></div>
 <?php } else { ?>
     <div style="display: none !important;">Lipscore: empty product data</div>
