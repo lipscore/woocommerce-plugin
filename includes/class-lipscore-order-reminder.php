@@ -7,6 +7,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'Lipscore_Order_Reminder' ) ) :
 
 class Lipscore_Order_Reminder {
+    const PARENT_SOURCE_NAME = 'wordpress';
+    const PARENT_SOURCE_ID = 'woocomerce';
+
     protected $products_helper;
 
     public function __construct() {
@@ -26,6 +29,10 @@ class Lipscore_Order_Reminder {
         $this->send( $data );
     }
 
+    /**
+     * @param \WC_Order $order
+     * @return array
+     */
     public function order_data( $order ) {
         if ( $order->get_shipping_first_name() || $order->get_shipping_last_name() ) {
             $buyer_first_name = $order->get_shipping_first_name();
@@ -36,12 +43,18 @@ class Lipscore_Order_Reminder {
         }
 
         return array(
-            'buyer_email'      => $order->get_billing_email(),
-            'buyer_name'       => sprintf( '%s %s', $buyer_first_name, $buyer_last_name ),
-            'discount_descr'   => Lipscore_Settings::coupon_description(),
+            'buyer_email' => $order->get_billing_email(),
+            'buyer_name' => sprintf('%s %s', $buyer_first_name, $buyer_last_name),
+            'discount_descr' => Lipscore_Settings::coupon_description(),
             'discount_voucher' => Lipscore_Settings::coupon_code(),
-            'purchased_at'     => (int) strtotime( $order->get_date_created() ),
-            'lang'             => Lipscore_Settings::locale()
+            'purchased_at' => (int)strtotime($order->get_date_created()),
+            'lang' => Lipscore_Settings::locale(),
+            'internal_order_id' => (string)$order->get_id(),
+            'internal_customer_id' => $order->get_customer_id(),
+            'parent_source_id' => (string)self::PARENT_SOURCE_ID,
+            'parent_source_name' => (string)self::PARENT_SOURCE_NAME,
+            'source_id' => '',
+            'source_name' => (string)get_bloginfo('name'),
         );
     }
 
