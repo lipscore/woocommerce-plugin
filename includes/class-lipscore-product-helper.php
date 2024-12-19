@@ -7,19 +7,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'Lipscore_Product_Helper' ) ) :
 
 class Lipscore_Product_Helper {
+    /**
+     * @param \WC_Product $product
+     * @return array
+     */
     public function product_data( $product ) {
         $parent_product_id = (int) $product->get_parent_id();
-        $product_id = '';
         $product_name = $product->get_title();
         $variant_name = '';
         $variant_id = '';
 
         if ( $parent_product_id > 0 ) {
-            $product_id = $parent_product_id;
+            $parent = wc_get_product( $parent_product_id );
+            $product_id = $this->product_id($parent);
             $variant_name = $product->get_name();
             $variant_id = $product->get_id();
         } else {
-            $product_id = $product->get_id();
+            $product_id = $this->product_id($product);
         }
 
         return array(
@@ -62,11 +66,39 @@ class Lipscore_Product_Helper {
         }
     }
 
+    /**
+     * @param \WC_Product $product
+     * @return mixed|string
+     */
+    protected function product_id( $product ) {
+        $id_attr = Lipscore_Settings::id_attr();
+        if (!$id_attr) {
+            return '';
+        }
+
+        if ($id_attr == 'sku') {
+            return $product->get_sku();
+        }
+
+        $id = $product->get_attribute($id_attr);
+        if (!$id) {
+            $id = get_post_meta($product->get_id(), $id_attr, true);
+        }
+        if (!$id) {
+            $id = $product->get_id();
+        }
+
+        return $id;
+    }
+
     protected function product_gtin( $product ) {
         $gtin_attr = Lipscore_Settings::gtin_attr();
-
         if (!$gtin_attr) {
             return '';
+        }
+
+        if ($gtin_attr == 'sku') {
+            return $product->get_sku();
         }
 
         $gtin = $product->get_attribute($gtin_attr);
@@ -81,9 +113,12 @@ class Lipscore_Product_Helper {
         return wp_get_attachment_url( $product->get_image_id() );
     }
 
+    /**
+     * @param \WC_Product $product
+     * @return string
+     */
     protected function availability( $product ) {
-        $stock = $product->is_in_stock() ? 'InStock' : 'OutOfStock';
-        return 'http://schema.org/' . $stock;
+        return $product->get_stock_quantity();
     }
 }
 
