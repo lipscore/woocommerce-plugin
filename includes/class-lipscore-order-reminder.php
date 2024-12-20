@@ -7,6 +7,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'Lipscore_Order_Reminder' ) ) :
 
 class Lipscore_Order_Reminder {
+    const PARENT_SOURCE_NAME = 'wordpress';
+    const PARENT_SOURCE_ID = 'woocomerce';
+
     protected $products_helper;
 
     public function __construct() {
@@ -26,6 +29,10 @@ class Lipscore_Order_Reminder {
         $this->send( $data );
     }
 
+    /**
+     * @param \WC_Order $order
+     * @return array
+     */
     public function order_data( $order ) {
         if ( $order->get_shipping_first_name() || $order->get_shipping_last_name() ) {
             $buyer_first_name = $order->get_shipping_first_name();
@@ -36,23 +43,48 @@ class Lipscore_Order_Reminder {
         }
 
         return array(
-            'buyer_email'      => $order->get_billing_email(),
-            'buyer_name'       => sprintf( '%s %s', $buyer_first_name, $buyer_last_name ),
-            'discount_descr'   => Lipscore_Settings::coupon_description(),
+            'buyer_email' => $order->get_billing_email(),
+            'buyer_name' => sprintf('%s %s', $buyer_first_name, $buyer_last_name),
+            'discount_descr' => Lipscore_Settings::coupon_description(),
             'discount_voucher' => Lipscore_Settings::coupon_code(),
-            'purchased_at'     => (int) strtotime( $order->get_date_created() ),
-            'lang'             => Lipscore_Settings::locale()
+            'purchased_at' => (int)strtotime($order->get_date_created()),
+            'lang' => Lipscore_Settings::locale(),
+            'internal_order_id' => (string)$order->get_id(),
+            'internal_customer_id' => $order->get_customer_id(),
+            'parent_source_id' => (string)self::PARENT_SOURCE_ID,
+            'parent_source_name' => (string)self::PARENT_SOURCE_NAME,
+            'source_id' => '',
+            'source_name' => (string)get_bloginfo('name'),
         );
     }
 
+    /**
+     * @param \WC_Order $order
+     * @return array
+     */
     public function products_data( $order ) {
         $products_data = array();
+
+        $bundleInviteType = get_option( 'lipscore_bundle_invitations', 'one' );
 
         $items = $order->get_items();
         
         foreach ($items as $item_id => $item) {
             $product_id = $item->get_product_id();
             $product = $item->get_product();
+
+            $boundleItems = $item->get_meta( '_bundled_items' );
+            $boundleParent = is_array($boundleItems) && count($boundleItems) > 0;
+            $boundleItem = $item->get_meta( '_bundled_by' );
+
+            //handle special cases first
+            if ($boundleParent && $bundleInviteType !== 'one') {
+                continue;
+            }
+
+            if ($boundleItem && $bundleInviteType !== 'all') {
+                continue;
+            }
 
             $products_data[ $product_id ] = $this->products_helper->product_data( $product );
         }
