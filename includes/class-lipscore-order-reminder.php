@@ -58,14 +58,33 @@ class Lipscore_Order_Reminder {
         );
     }
 
+    /**
+     * @param \WC_Order $order
+     * @return array
+     */
     public function products_data( $order ) {
         $products_data = array();
+
+        $bundleInviteType = get_option( 'lipscore_bundle_invitations', 'one' );
 
         $items = $order->get_items();
         
         foreach ($items as $item_id => $item) {
             $product_id = $item->get_product_id();
             $product = $item->get_product();
+
+            $boundleItems = $item->get_meta( '_bundled_items' );
+            $boundleParent = is_array($boundleItems) && count($boundleItems) > 0;
+            $boundleItem = $item->get_meta( '_bundled_by' );
+
+            //handle special cases first
+            if ($boundleParent && $bundleInviteType !== 'one') {
+                continue;
+            }
+
+            if ($boundleItem && $bundleInviteType !== 'all') {
+                continue;
+            }
 
             $products_data[ $product_id ] = $this->products_helper->product_data( $product );
         }

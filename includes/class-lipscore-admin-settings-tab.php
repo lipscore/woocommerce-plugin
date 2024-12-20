@@ -43,6 +43,10 @@ class Lipscore_Admin_Settings_Tab {
         $settings['gtin']                      = $this->gtin_setting();
         $settings['product_attrs_section_end'] = $this->product_attrs_section_end();
 
+        $settings['product_bundles_title']       = $this->product_bundles_title();
+        $settings['bundle']                    = $this->bundle_setting();
+        $settings['product_bundles_section_end'] = $this->product_bundles_section_end();
+
         $settings['emails_title'] = $this->emails_title();
         $settings['order_status'] = $this->order_status_setting();
         $settings['emails_end']   = $this->emails_section_end();
@@ -53,11 +57,11 @@ class Lipscore_Admin_Settings_Tab {
 
         $settings['coupons_end']   = $this->coupons_section_end();
 
-				$settings['appearance_title']   = $this->appearance_title();
-				$settings['disaplay_ratings']   = $this->disaplay_ratings_setting();
-				$settings['disaplay_reviews']   = $this->disaplay_reviews_setting();
-				$settings['disaplay_questions'] = $this->disaplay_questions_setting();
-				$settings['appearance_end']     = $this->appearance_section_end();
+        $settings['appearance_title']   = $this->appearance_title();
+        $settings['disaplay_ratings']   = $this->disaplay_ratings_setting();
+        $settings['disaplay_reviews']   = $this->disaplay_reviews_setting();
+        $settings['disaplay_questions'] = $this->disaplay_questions_setting();
+        $settings['appearance_end']     = $this->appearance_section_end();
 
         return apply_filters( 'wc_settings_tab_lipscore_settings', $settings );
     }
@@ -139,6 +143,29 @@ class Lipscore_Admin_Settings_Tab {
         );
     }
 
+    protected function product_bundles_title() {
+        return array(
+            'name' => __( 'Product Bundles', 'woocommerce-settings-tab-lipscore' ),
+            'type' => 'title',
+            'id'   => 'lipscore_product_bundles_title'
+        );
+    }
+
+    protected function bundle_setting() {
+        $options = array( '' => __( '&mdash; Select &mdash;', 'woocommerce-settings-tab-lipscore' ) );
+
+        $options['one'] = __('One item', 'woocommerce-settings-tab-lipscore' );
+        $options['all'] = __('All products separatly', 'woocommerce-settings-tab-lipscore' );
+
+        return array(
+            'name'    => __( 'Create invitations for', 'woocommerce-settings-tab-lipscore' ),
+            'type'    => 'select',
+            'id'      => 'lipscore_bundle_invitations',
+            'default' => '',
+            'options' => $options
+        );
+    }
+
     protected function id_setting() {
         $options = array( '' => __( '&mdash; Select &mdash;', 'woocommerce-settings-tab-lipscore' ) );
 
@@ -198,6 +225,13 @@ class Lipscore_Admin_Settings_Tab {
         return array(
             'type' => 'sectionend',
             'id'   => 'lipscore_product_attrs_section_end'
+        );
+    }
+
+    protected function product_bundles_section_end() {
+        return array(
+            'type' => 'sectionend',
+            'id'   => 'lipscore_product_bundles_section_end'
         );
     }
 
