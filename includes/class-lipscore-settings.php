@@ -13,9 +13,10 @@ class Lipscore_Settings {
     const DEFAULT_COUPON_CODE        = '';
     const DEFAULT_COUPON_DESCRIPTION = '';
     const DEFAULT_GTIN               = '';
-		const DEFAULT_DISPLAY_RATINGS    = 'yes';
-		const DEFAULT_DISPLAY_REVIEWS    = 'yes';
-		const DEFAULT_DISPLAY_QUESTIONS  = 'no';
+    const DEFAULT_ID                 = '';
+    const DEFAULT_DISPLAY_RATINGS    = 'yes';
+    const DEFAULT_DISPLAY_REVIEWS    = 'yes';
+    const DEFAULT_DISPLAY_QUESTIONS  = 'no';
 
     public static function api_key() {
         return get_option( 'lipscore_api_key', self::DEFAULT_API_KEY );
@@ -27,6 +28,10 @@ class Lipscore_Settings {
 
     public static function locale() {
         return get_option( 'lipscore_locale', self::DEFAULT_LOCALE );
+    }
+
+    public static function id_attr() {
+        return get_option( 'lipscore_id', self::DEFAULT_ID );
     }
 
     public static function gtin_attr() {
@@ -49,11 +54,11 @@ class Lipscore_Settings {
         return self::DEFAULT_API_KEY == self::api_key();
     }
 
-		public static function is_valid_api_key() {
-		    return self::api_key() && !self::is_default_api_key();
-		}
+    public static function is_valid_api_key() {
+        return self::api_key() && !self::is_default_api_key();
+    }
 
-		public static function is_ratings_displayed() {
+    public static function is_ratings_displayed() {
         return get_option( 'lipscore_disaplay_ratings', self::DEFAULT_DISPLAY_RATINGS ) == 'yes';
     }
 
@@ -61,7 +66,7 @@ class Lipscore_Settings {
         return get_option( 'lipscore_disaplay_reviews', self::DEFAULT_DISPLAY_REVIEWS ) == 'yes';
     }
 
-		public static function is_questions_displayed() {
+    public static function is_questions_displayed() {
         return get_option( 'lipscore_disaplay_questions', self::DEFAULT_DISPLAY_QUESTIONS ) == 'yes';
     }
 }
