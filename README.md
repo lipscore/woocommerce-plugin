@@ -20,6 +20,9 @@
 
 ## Changelog ##
 
+### 0.6.1 ###
+* Fixed non existing product in order reminder
+
 ### 0.6 ###
 * Added bundle support (WooCommerce Product Bundles)
 * Added configuration for bundle, if one or multiple invites (for each product in bundle) are sent

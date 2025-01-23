@@ -86,6 +86,10 @@ class Lipscore_Order_Reminder {
                 continue;
             }
 
+            if (!$product) {
+                continue;
+            }
+
             $products_data[ $product_id ] = $this->products_helper->product_data( $product );
         }
 
