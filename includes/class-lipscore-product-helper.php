@@ -28,7 +28,7 @@ class Lipscore_Product_Helper {
 
         return array(
             'name'         => $product_name,
-            'brand'        => '',
+            'brand'        => $this->product_brand( $product ),
             'sku_values'   => [$product->get_sku()],
             'internal_id'  => $product_id,
             'url'          => get_permalink($product->get_id()),
@@ -42,6 +42,7 @@ class Lipscore_Product_Helper {
         );
     }
 
+
     public function richsnippet_product_data( $product ) {
         return array(
             'description'  => get_the_excerpt($product->get_id()),
@@ -51,6 +52,23 @@ class Lipscore_Product_Helper {
 
     protected function product_category( $product ) {
         $terms = get_the_terms( $product->get_id(), 'product_cat' );
+
+        if ( is_wp_error( $terms ) || empty( $terms ) || !is_array( $terms ) ) {
+            return '';
+        } else {
+            $terms_names = array_map(
+                function( $term ) {
+                    return $term->name;
+                },
+                $terms
+            );
+
+            return implode( ', ', $terms_names );
+        }
+    }
+
+    protected function product_brand( $product ) {
+        $terms = get_the_terms( $product->get_id(), 'product_brand' );
 
         if ( is_wp_error( $terms ) || empty( $terms ) || !is_array( $terms ) ) {
             return '';
