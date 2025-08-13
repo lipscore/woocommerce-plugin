@@ -36,7 +36,7 @@ class Lipscore_Widget_Helper {
     protected function to_string( $attrs ) {
         $strAttrs = array();
         foreach ($attrs as $attr => $value) {
-            $value = htmlspecialchars( $value );
+            $value = htmlspecialchars( (string) $value );
             $strAttrs[] = "$attr=\"$value\"";
         }
         return implode( ' ', $strAttrs );

@@ -20,6 +20,9 @@
 
 ## Changelog ##
 
+### 0.6.3 ###
+* Fixed notice in widget helper
+
 ### 0.6.1 ###
 * Fixed non existing product in order reminder
 
