@@ -11,9 +11,19 @@ class Lipscore_Initializer {
         $api_key   = Lipscore_Settings::api_key();
         $assetsUrl = lipscore()->config->assets_url();
         $locale    = Lipscore_Settings::locale();
+        $script_attributes = apply_filters('lipscore_script_attributes', array(
+            'data-cfasync' => 'false',
+            'type' => 'text/javascript'
+        ));
+
+        $attrs_string = '';
+        foreach ($script_attributes as $key => $value) {
+            $attrs_string .= sprintf('%s="%s" ', esc_attr($key), esc_attr($value));
+        }
+        $attrs_string = trim ( $attrs_string );
 
         echo "
-            <script data-cfasync=\"false\" type=\"text/javascript\">
+            <script {$attrs_string}>
             //<![CDATA[
             window.lipscoreInit = function() {
                 lipscore.init({

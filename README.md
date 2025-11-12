@@ -20,6 +20,9 @@
 
 ## Changelog ##
 
+### 0.6.4 ###
+* Add support for custom attributes in initializer
+
 ### 0.6.3 ###
 * Fixed notice in widget helper
 
