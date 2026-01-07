@@ -20,6 +20,9 @@
 
 ## Changelog ##
 
+### 0.6.5 ###
+* Fixed category for variant products
+
 ### 0.6.4 ###
 * Add support for custom attributes in initializer
 
