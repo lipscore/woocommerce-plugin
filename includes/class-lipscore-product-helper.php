@@ -22,8 +22,10 @@ class Lipscore_Product_Helper {
             $product_id = $this->product_id($parent);
             $variant_name = $product->get_name();
             $variant_id = $product->get_id();
+            $category = $this->product_category($parent);
         } else {
             $product_id = $this->product_id($product);
+            $category = $this->product_category($product);
         }
 
         return array(
@@ -35,7 +37,7 @@ class Lipscore_Product_Helper {
             'image_url'    => $this->image_url( $product ),
             'price'        => $product->get_price(),
             'currency'     => get_woocommerce_currency(),
-            'category'     => $this->product_category( $product ),
+            'category'     => $category,
             'gtin'         => $this->product_gtin( $product ),
             'variant_name' => $variant_name,
             'variant_id'   => $variant_id
