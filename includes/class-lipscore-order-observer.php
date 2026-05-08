@@ -12,19 +12,30 @@ class Lipscore_Order_Observer {
         $new_status = $this->normalize_status( $new_status );
 
         if ( $old_status != $new_status && $this->is_reminder_required( $new_status ) ) {
-            $order = new WC_Order( $order_id );
+            $order = wc_get_order( $order_id );
             if ( $order ) {
                 $this->send_order( $order );
             }
         }
     }
 
-    public function create( $order_id, $posted ) {
-        $order = new WC_Order( $order_id );
+    public function create( $order_id, $posted = null ) {
+        $order = wc_get_order( $order_id );
         if ( ! $order ) {
             return;
         }
 
+        $status = $this->normalize_status( $order->get_status() );
+        if ( $this->is_reminder_required( $status ) ) {
+            $this->send_order( $order );
+        }
+    }
+
+    // Called by woocommerce_store_api_checkout_order_processed (Blocks checkout, WC 8.x+)
+    public function create_from_order( $order ) {
+        if ( ! $order instanceof WC_Order ) {
+            return;
+        }
         $status = $this->normalize_status( $order->get_status() );
         if ( $this->is_reminder_required( $status ) ) {
             $this->send_order( $order );

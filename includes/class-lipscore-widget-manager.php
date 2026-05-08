@@ -59,12 +59,14 @@ class Lipscore_Widget_Manager {
         if ( function_exists( 'is_woocommerce' ) && is_woocommerce() && is_singular() ) {
             return Lipscore::dir( 'templates/reviews_single_widget' . '.php' );
         }
+        return $comment_template;
     }
 
     public function show_questions_instead_comments($comment_template) {
         if ( function_exists( 'is_woocommerce' ) && is_woocommerce() && is_singular() ) {
             return Lipscore::dir( 'templates/questions_single_widget' . '.php' );
         }
+        return $comment_template;
     }
 
     public function add_styles() {

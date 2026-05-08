@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Plugin Name: Lipscore Ratings and Reviews
  * Plugin URI:  http://lipscore.com/
  * Description: Collecting reviews is difficult. Let the most efficient and flexible plugin in the world do it for you.
- * Version:     0.6.5
+ * Version:     0.7.0
  * Author:      Lipscore
  * Author URI:  http://lipscore.com/
  * Donate link: http://lipscore.com/
@@ -207,46 +207,46 @@ final class Lipscore {
 
         $widget_manager = new Lipscore_Widget_Manager();
 
-				if ( Lipscore_Settings::is_ratings_displayed() ) {
-					add_action(
-							'woocommerce_after_shop_loop_item_title',
-							array( $widget_manager, 'add_small_rating' ),
-							1
-					);
-					add_action(
-							'woocommerce_single_product_summary',
-							array( $widget_manager, 'add_rating' ),
-							6
-					);
-				}
+        if ( Lipscore_Settings::is_ratings_displayed() ) {
+            add_action(
+                    'woocommerce_after_shop_loop_item_title',
+                    array( $widget_manager, 'add_small_rating' ),
+                    1
+            );
+            add_action(
+                    'woocommerce_single_product_summary',
+                    array( $widget_manager, 'add_rating' ),
+                    6
+            );
+        }
 
-				if ( Lipscore_Settings::is_reviews_displayed() ) {
-	        add_action(
-	            'woocommerce_product_tabs',
-	            array( $widget_manager, 'add_reviews_tab' ),
-	            6
-	        );
-					add_filter(
-	            'comments_template',
-	            array( $widget_manager, 'show_reviews_instead_comments' ),
-	            10,
-	            2
-	        );
-				}
+        if ( Lipscore_Settings::is_reviews_displayed() ) {
+            add_action(
+                'woocommerce_product_tabs',
+                array( $widget_manager, 'add_reviews_tab' ),
+                6
+            );
+                    add_filter(
+                'comments_template',
+                array( $widget_manager, 'show_reviews_instead_comments' ),
+                10,
+                2
+            );
+                }
 
-				if ( Lipscore_Settings::is_questions_displayed() ) {
-					add_action(
-	            'woocommerce_product_tabs',
-	            array( $widget_manager, 'add_questions_tab' ),
-	            7
-	        );
-					add_filter(
-	            'comments_template',
-	            array( $widget_manager, 'show_questions_instead_comments' ),
-	            11,
-	            2
-	        );
-				}
+                if ( Lipscore_Settings::is_questions_displayed() ) {
+                    add_action(
+                'woocommerce_product_tabs',
+                array( $widget_manager, 'add_questions_tab' ),
+                7
+            );
+                    add_filter(
+                'comments_template',
+                array( $widget_manager, 'show_questions_instead_comments' ),
+                11,
+                2
+            );
+        }
 
         add_action(
             'wp_head',
@@ -272,6 +272,13 @@ final class Lipscore {
             10,
             2
         );
+        // Blocks-based checkout (WC 8.x+) fires this hook instead
+        add_action(
+            'woocommerce_store_api_checkout_order_processed',
+            array( $order_observer, 'create_from_order' ),
+            10,
+            1
+        );
         add_action(
             'woocommerce_order_status_changed',
             array( $order_observer, 'status_update' ),
@@ -286,20 +293,20 @@ final class Lipscore {
             2
         );
 
-				add_filter(
-						'plugin_action_links_' . $this->basename,
-						array( __CLASS__, 'plugin_action_links' )
-				);
+        add_filter(
+            'plugin_action_links_' . $this->basename,
+            array( __CLASS__, 'plugin_action_links' )
+        );
 
-				add_filter(
-						'load_textdomain_mofile',
-						array( $this, 'load_custom_plugin_translation_file' ),
-						10,
-						2
-				);
+        add_filter(
+            'load_textdomain_mofile',
+            array( $this, 'load_custom_plugin_translation_file' ),
+            10,
+            2
+        );
 
-				$shortcode_manager = Lipscore_Shortcode_Manager::get_instance();
-				add_action( 'init', [ $shortcode_manager, 'register_shortcodes' ] );
+        $shortcode_manager = Lipscore_Shortcode_Manager::get_instance();
+        add_action( 'init', [ $shortcode_manager, 'register_shortcodes' ] );
 	}
 
 	/**
