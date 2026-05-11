@@ -2,8 +2,8 @@
 **Contributors:**      Lipscore http://lipscore.com/  
 **Tags:**  
 **Requires at least:** 4.4  
-**Tested up to:**      7.3
-**Stable tag:**        0.5
+**Tested up to:**      10.7
+**Stable tag:**        0.7
 **License:**           GPLv2  
 **License URI:**       http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -19,6 +19,9 @@
 ## Screenshots ##
 
 ## Changelog ##
+
+### 0.7.0 ###
+* Adjustment for new block based checkout
 
 ### 0.6.5 ###
 * Fixed category for variant products
