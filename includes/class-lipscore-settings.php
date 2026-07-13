@@ -14,9 +14,10 @@ class Lipscore_Settings {
     const DEFAULT_COUPON_DESCRIPTION = '';
     const DEFAULT_GTIN               = '';
     const DEFAULT_ID                 = '';
-    const DEFAULT_DISPLAY_RATINGS    = 'yes';
-    const DEFAULT_DISPLAY_REVIEWS    = 'yes';
-    const DEFAULT_DISPLAY_QUESTIONS  = 'no';
+    const DEFAULT_DISPLAY_RATINGS             = 'yes';
+    const DEFAULT_DISPLAY_REVIEWS             = 'yes';
+    const DEFAULT_DISPLAY_QUESTIONS           = 'no';
+    const DEFAULT_DISPLAY_PRODUCT_AI_SUMMARY  = 'no';
 
     public static function api_key() {
         return get_option( 'lipscore_api_key', self::DEFAULT_API_KEY );
@@ -68,6 +69,10 @@ class Lipscore_Settings {
 
     public static function is_questions_displayed() {
         return get_option( 'lipscore_disaplay_questions', self::DEFAULT_DISPLAY_QUESTIONS ) == 'yes';
+    }
+
+    public static function is_product_ai_summary_displayed() {
+        return get_option( 'lipscore_display_product_ai_summary', self::DEFAULT_DISPLAY_PRODUCT_AI_SUMMARY ) == 'yes';
     }
 }
 

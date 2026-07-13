@@ -30,6 +30,8 @@ class Lipscore_Shortcode_Manager {
         add_shortcode( 'lipscore-testimonial', [ $this, 'render_testimonial_widget' ] );
         add_shortcode( 'lipscore-service-review-badge', [ $this, 'render_service_review_badge_widget' ] );
         add_shortcode( 'lipscore-testimonial-banner', [ $this, 'render_testimonial_banner_widget' ] );
+        add_shortcode( 'lipscore-product-ai-summary', [ $this, 'render_product_ai_summary_widget' ] );
+        add_shortcode( 'lipscore-service-ai-summary', [ $this, 'render_service_ai_summary_widget' ] );
     }
 
     public function render_small_rating_widget() {
@@ -96,6 +98,28 @@ class Lipscore_Shortcode_Manager {
         ob_start();
 
         $this->widget_manager->render_widget( 'testimonial_banner', [ 'width' => $atts['width'], 'height' => $atts['height'], 'class' => $atts['class'] ] );
+
+        return ob_get_clean();
+    }
+
+    public function render_product_ai_summary_widget() {
+        ob_start();
+
+        $this->widget_manager->render_widget( 'product_ai_summary_widget' );
+
+        return ob_get_clean();
+    }
+
+    public function render_service_ai_summary_widget( $atts ) {
+        $atts = shortcode_atts( [
+            'width'  => '100%',
+            'height' => '150px',
+            'class'  => ''
+        ], $atts );
+
+        ob_start();
+
+        $this->widget_manager->render_widget( 'service_ai_summary_widget', [ 'width' => $atts['width'], 'height' => $atts['height'], 'class' => $atts['class'] ] );
 
         return ob_get_clean();
     }

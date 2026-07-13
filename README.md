@@ -20,6 +20,9 @@
 
 ## Changelog ##
 
+### 0.8.0 ###
+* Add new AI widgets
+
 ### 0.7.0 ###
 * Adjustment for new block based checkout
 
