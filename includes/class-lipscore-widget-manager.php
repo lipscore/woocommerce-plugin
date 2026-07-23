@@ -80,6 +80,9 @@ class Lipscore_Widget_Manager {
     }
 
     public function reviews_tab_content() {
+        if ( Lipscore_Settings::is_product_ai_summary_displayed() ) {
+            $this->render_widget( 'product_ai_summary_widget' );
+        }
         $this->render_widget( 'reviews_widget' );
     }
 
@@ -105,6 +108,10 @@ class Lipscore_Widget_Manager {
 
     public function add_testimonial_banner() {
         return $this->render_widget( 'testimonial_banner', array( 'width'=> '100%', 'height' => '150px' ) );
+    }
+
+    public function add_service_ai_summary() {
+        $this->render_widget( 'service_ai_summary_widget' );
     }
 
     public function render_widget( $file, $args = array() ) {

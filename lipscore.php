@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Plugin Name: Lipscore Ratings and Reviews
  * Plugin URI:  http://lipscore.com/
  * Description: Collecting reviews is difficult. Let the most efficient and flexible plugin in the world do it for you.
- * Version:     0.7.0
+ * Version:     0.8.0
  * Author:      Lipscore
  * Author URI:  http://lipscore.com/
  * Donate link: http://lipscore.com/
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 
 /**
- * Copyright (c) 2021 Lipscore (email : support@lipscore.com)
+ * Copyright (c) 2026 Lipscore (email : support@lipscore.com)
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License, version 2 or, at
@@ -167,6 +167,7 @@ final class Lipscore {
 		// 0 Widgets because widgets_init runs at init priority 1.
 
 		add_action( 'init', array( $this, 'init' ), 0 );
+        add_action( 'widgets_init', array( $this, 'register_widgets' ) );
 
         $settings_tab = new Lipscore_Admin_Settings_Tab();
         add_filter(
@@ -357,6 +358,10 @@ final class Lipscore {
 	 * @since  0.1.0
 	 * @return void
 	 */
+    public function register_widgets() {
+        register_widget( 'Lipscore_Service_AI_Summary_Widget' );
+    }
+
 	public function init() {
 		// bail early if requirements aren't met
 		if ( ! $this->check_requirements() ) {

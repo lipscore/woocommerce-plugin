@@ -57,11 +57,12 @@ class Lipscore_Admin_Settings_Tab {
 
         $settings['coupons_end']   = $this->coupons_section_end();
 
-        $settings['appearance_title']   = $this->appearance_title();
-        $settings['disaplay_ratings']   = $this->disaplay_ratings_setting();
-        $settings['disaplay_reviews']   = $this->disaplay_reviews_setting();
-        $settings['disaplay_questions'] = $this->disaplay_questions_setting();
-        $settings['appearance_end']     = $this->appearance_section_end();
+        $settings['appearance_title']              = $this->appearance_title();
+        $settings['disaplay_ratings']              = $this->disaplay_ratings_setting();
+        $settings['disaplay_reviews']              = $this->disaplay_reviews_setting();
+        $settings['disaplay_questions']            = $this->disaplay_questions_setting();
+        $settings['display_product_ai_summary']    = $this->display_product_ai_summary_setting();
+        $settings['appearance_end']                = $this->appearance_section_end();
 
         return apply_filters( 'wc_settings_tab_lipscore_settings', $settings );
     }
@@ -330,6 +331,15 @@ class Lipscore_Admin_Settings_Tab {
             'type'      => 'checkbox',
             'id'        => 'lipscore_disaplay_questions',
             'default'   => Lipscore_Settings::DEFAULT_DISPLAY_QUESTIONS
+        );
+    }
+
+    protected function display_product_ai_summary_setting() {
+        return array(
+            'name'      => __( 'Display Product AI Summary', 'woocommerce-settings-tab-lipscore' ),
+            'type'      => 'checkbox',
+            'id'        => 'lipscore_display_product_ai_summary',
+            'default'   => Lipscore_Settings::DEFAULT_DISPLAY_PRODUCT_AI_SUMMARY
         );
     }
 
