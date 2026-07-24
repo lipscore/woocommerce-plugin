@@ -3,7 +3,7 @@
 **Tags:**  
 **Requires at least:** 4.4  
 **Tested up to:**      10.7
-**Stable tag:**        0.7
+**Stable tag:**        0.8.1
 **License:**           GPLv2  
 **License URI:**       http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -19,6 +19,9 @@
 ## Screenshots ##
 
 ## Changelog ##
+
+### 0.8.1 ###
+* Trim leading and trailing whitespace from API Key and Secret API Key settings
 
 ### 0.8.0 ###
 * Add new AI widgets

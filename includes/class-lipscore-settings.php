@@ -20,11 +20,11 @@ class Lipscore_Settings {
     const DEFAULT_DISPLAY_PRODUCT_AI_SUMMARY  = 'no';
 
     public static function api_key() {
-        return get_option( 'lipscore_api_key', self::DEFAULT_API_KEY );
+        return trim( get_option( 'lipscore_api_key', self::DEFAULT_API_KEY ) );
     }
 
     public static function secret() {
-        return get_option( 'lipscore_secret', self::DEFAULT_API_KEY );
+        return trim( get_option( 'lipscore_secret', self::DEFAULT_API_KEY ) );
     }
 
     public static function locale() {
