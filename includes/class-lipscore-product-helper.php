@@ -39,6 +39,7 @@ class Lipscore_Product_Helper {
             'currency'     => get_woocommerce_currency(),
             'category'     => $category,
             'gtin'         => $this->product_gtin( $product ),
+            'mpn'          => $this->product_mpn( $product ),
             'variant_name' => $variant_name,
             'variant_id'   => $variant_id
         );
@@ -129,6 +130,24 @@ class Lipscore_Product_Helper {
         return $gtin;
     }
 
+    protected function product_mpn( $product ) {
+        $mpn_attr = Lipscore_Settings::mpn_attr();
+        if (!$mpn_attr) {
+            return '';
+        }
+
+        if ($mpn_attr == 'sku') {
+            return $product->get_sku();
+        }
+
+        $mpn = $product->get_attribute($mpn_attr);
+        if (!$mpn) {
+            $mpn = get_post_meta($product->get_id(), $mpn_attr, true);
+        }
+
+        return $mpn;
+    }
+
     protected function image_url ( $product ) {
         return wp_get_attachment_url( $product->get_image_id() );
     }
@@ -138,7 +157,7 @@ class Lipscore_Product_Helper {
      * @return string
      */
     protected function availability( $product ) {
-        return $product->get_stock_quantity();
+        return $product->is_in_stock() ? '1' : '0';
     }
 }
 
