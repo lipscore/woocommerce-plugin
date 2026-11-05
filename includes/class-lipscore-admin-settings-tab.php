@@ -41,6 +41,7 @@ class Lipscore_Admin_Settings_Tab {
         $settings['product_attrs_title']       = $this->product_attrs_title();
         $settings['id']                        = $this->id_setting();
         $settings['gtin']                      = $this->gtin_setting();
+        $settings['mpn']                       = $this->mpn_setting();
         $settings['product_attrs_section_end'] = $this->product_attrs_section_end();
 
         $settings['product_bundles_title']       = $this->product_bundles_title();
@@ -219,6 +220,33 @@ class Lipscore_Admin_Settings_Tab {
             'name'    => __( 'GTIN attribute', 'woocommerce-settings-tab-lipscore' ),
             'type'    => 'select',
             'id'      => 'lipscore_gtin',
+            'default' => '',
+            'options' => $options
+        );
+    }
+
+    protected function mpn_setting() {
+        $options = array( '' => __( '&mdash; Select &mdash;', 'woocommerce-settings-tab-lipscore' ) );
+
+        $options['sku'] = __('SKU', 'woocommerce-settings-tab-lipscore' );
+        $options['product_id'] = __('ID', 'woocommerce-settings-tab-lipscore' );
+
+        $attributes = wc_get_attribute_taxonomies();
+        foreach ( $attributes as $attribute ) {
+            $options[$attribute->attribute_name] = $attribute->attribute_label;
+        }
+
+        global $wpdb;
+        $post_meta_keys = $wpdb->get_col("SELECT DISTINCT meta_key FROM {$wpdb->postmeta} ORDER BY meta_key");
+        
+        foreach ( $post_meta_keys as $post_meta_key ) {
+            $options[$post_meta_key] = __( $post_meta_key, 'woocommerce' );
+        }
+
+        return array(
+            'name'    => __( 'MPN attribute', 'woocommerce-settings-tab-lipscore' ),
+            'type'    => 'select',
+            'id'      => 'lipscore_mpn',
             'default' => '',
             'options' => $options
         );
