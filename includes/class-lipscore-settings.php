@@ -13,6 +13,7 @@ class Lipscore_Settings {
     const DEFAULT_COUPON_CODE        = '';
     const DEFAULT_COUPON_DESCRIPTION = '';
     const DEFAULT_GTIN               = '';
+    const DEFAULT_MPN                = '';
     const DEFAULT_ID                 = '';
     const DEFAULT_DISPLAY_RATINGS             = 'yes';
     const DEFAULT_DISPLAY_REVIEWS             = 'yes';
@@ -37,6 +38,10 @@ class Lipscore_Settings {
 
     public static function gtin_attr() {
         return get_option( 'lipscore_gtin', self::DEFAULT_GTIN );
+    }
+
+    public static function mpn_attr() {
+        return get_option( 'lipscore_mpn', self::DEFAULT_MPN );
     }
 
     public static function order_status() {
