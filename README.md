@@ -3,7 +3,7 @@
 **Tags:**  
 **Requires at least:** 4.4  
 **Tested up to:**      10.7
-**Stable tag:** 0.10
+**Stable tag:** 0.10.1
 **License:**           GPLv2  
 **License URI:**       http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -19,6 +19,9 @@
 ## Screenshots ##
 
 ## Changelog ##
+
+### 0.10.1
+- Patch release for version 0.10
 
 ### 0.10
 - Add MPN support
